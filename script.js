@@ -1,7 +1,7 @@
 /**
  * GIRLHUB BY DEBBS - MASTER SCRIPT
  * Developed for: Lanor Jephthah Kwame
- * Description: Handles all logic for currency, cart, search, bundles, and UI interactions.
+ * Description: Handles all logic including Responsive Quick View, Cart, and Currency.
  */
 
 // =========================================
@@ -22,22 +22,22 @@ const exchangeRates = {
     'US': { symbol: '$', rate: 0.06 }
 };
 
-// Mock Database - Expanded for Search & Quick View
+// UPDATED DATABASE (Matches your HTML Images)
 const products = [
     { 
         id: 1, 
         name: "The 'Debbs' Gold Choker", 
         category: "Jewelry", 
         price: 150, 
-        image: "https://source.unsplash.com/random/600x600?gold,necklace",
-        desc: "18k gold vermeil, water-resistant, and perfect for layering." 
+        image: "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?q=80&w=600&auto=format&fit=crop",
+        desc: "18k gold vermeil, water-resistant, and perfect for layering. A campus essential." 
     },
     { 
         id: 2, 
         name: "Vanilla Oud Essence", 
         category: "Fragrance", 
         price: 200, 
-        image: "https://source.unsplash.com/random/600x600?perfume",
+        image: "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?q=80&w=600&auto=format&fit=crop",
         desc: "A warm, spicy scent that lasts all day. Notes of vanilla, oud, and amber."
     },
     { 
@@ -45,7 +45,7 @@ const products = [
         name: "The Uni Tote", 
         category: "Accessories", 
         price: 90, 
-        image: "https://source.unsplash.com/random/600x600?tote",
+        image: "https://images.unsplash.com/photo-1544816155-12df9643f363?q=80&w=600&auto=format&fit=crop",
         desc: "Canvas tote with reinforced straps. Fits a 15-inch laptop comfortably."
     },
     { 
@@ -53,7 +53,7 @@ const products = [
         name: "Aesthetic Tumbler", 
         category: "Lifestyle", 
         price: 85, 
-        image: "https://source.unsplash.com/random/600x600?tumbler",
+        image: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?q=80&w=600&auto=format&fit=crop",
         desc: "Borosilicate glass with bamboo lid. Keeps your iced coffee cold for 6 hours."
     },
     { 
@@ -61,7 +61,7 @@ const products = [
         name: "Pearl Drop Earrings", 
         category: "Jewelry", 
         price: 55, 
-        image: "https://source.unsplash.com/random/600x600?earrings",
+        image: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?q=80&w=600&auto=format&fit=crop",
         desc: "Freshwater pearls on gold-plated hoops. Elegant yet understated."
     },
     { 
@@ -69,7 +69,7 @@ const products = [
         name: "Digital Vision Planner", 
         category: "Digital", 
         price: 40, 
-        image: "https://source.unsplash.com/random/600x600?planner",
+        image: "https://images.unsplash.com/photo-1506784983877-45594efa4cbe?q=80&w=600&auto=format&fit=crop",
         desc: "iPad compatible PDF planner with hyperlinks. Get your life organized."
     }
 ];
@@ -84,9 +84,9 @@ document.addEventListener('DOMContentLoaded', () => {
     initMobileMenu();
     initSearch();
     initCart();
-    initQuickView(); // Injects the modal HTML first
+    initQuickView(); 
     initBundleBuilder();
-    initProductButtons(); // Attach listeners to existing HTML buttons
+    initProductButtons(); 
     updateCurrencyDisplay();
 });
 
@@ -95,13 +95,10 @@ document.addEventListener('DOMContentLoaded', () => {
 // =========================================
 
 function initPreloader() {
-    const preloader = document.getElementById('preloader');
-    
-    // Simulate loading time for assets
     window.addEventListener('load', () => {
         setTimeout(() => {
-            document.body.classList.remove('loading'); // CSS handles fade out
-        }, 1500); // 1.5s delay for luxury feel
+            document.body.classList.remove('loading'); 
+        }, 1500); 
     });
 }
 
@@ -114,24 +111,20 @@ function initEntryModal() {
     const form = document.getElementById('preference-form');
     const closeBtn = modal.querySelector('.close-modal');
     const select = document.getElementById('shipping-loc');
-
-    // Check if user has already visited (LocalStorage)
     const hasVisited = localStorage.getItem('girlhub_visited');
 
     if (!hasVisited) {
         setTimeout(() => {
             modal.classList.add('open');
             document.body.classList.add('no-scroll');
-        }, 2500); // Show after preloader
+        }, 2500);
     } else {
-        // Load saved currency
         const savedCurrency = JSON.parse(localStorage.getItem('girlhub_currency'));
         if (savedCurrency) {
             setCurrency(savedCurrency.code);
         }
     }
 
-    // Close Logic
     const closeModal = () => {
         modal.classList.remove('open');
         document.body.classList.remove('no-scroll');
@@ -140,18 +133,12 @@ function initEntryModal() {
 
     closeBtn.addEventListener('click', closeModal);
 
-    // Form Submit
     form.addEventListener('submit', (e) => {
         e.preventDefault();
         const code = select.value;
         const email = document.getElementById('email-signup').value;
-        
         setCurrency(code);
-        
-        // Mock API call for email
-        console.log(`Subscribed: ${email}`);
         showNotification("Welcome to the club! 10% Discount Applied.");
-        
         closeModal();
     });
 }
@@ -171,24 +158,17 @@ function formatPrice(amount) {
 }
 
 function updateAllPrices() {
-    // Update Static HTML Prices (Best Sellers)
-    // Note: In a real app, these would be rendered from the DB. 
-    // Here we simulate updating the visible DOM elements.
     const priceEls = document.querySelectorAll('.price');
-    // We map the first few products to the DOM elements for this demo
     priceEls.forEach((el, index) => {
         if(products[index]) {
-            // Check if it has an old price span
             if(el.querySelector('.old-price')) {
-                const oldVal = (products[index].price * 1.3).toFixed(2); // Fake old price
+                const oldVal = (products[index].price * 1.3).toFixed(2);
                 el.innerHTML = `<span class="old-price">${state.currency.symbol}${oldVal}</span> ${formatPrice(products[index].price)}`;
             } else {
                 el.innerText = formatPrice(products[index].price);
             }
         }
     });
-
-    // Update Cart Sidebar Prices
     renderCart();
 }
 
@@ -206,14 +186,11 @@ function initMobileMenu() {
     const nav = document.querySelector('.desktop-nav');
     const dropdownTrigger = document.querySelector('.has-dropdown > a');
     
-    // Toggle Menu
     toggle.addEventListener('click', () => {
         nav.classList.toggle('active');
-        // Animate hamburger bars (Optional CSS toggle)
         toggle.classList.toggle('active');
     });
 
-    // Mobile Accordion for Mega Menu
     if (dropdownTrigger) {
         dropdownTrigger.addEventListener('click', (e) => {
             if (window.innerWidth <= 768) {
@@ -224,7 +201,6 @@ function initMobileMenu() {
         });
     }
 
-    // Close menu when clicking a link
     const links = document.querySelectorAll('.nav-link');
     links.forEach(link => {
         link.addEventListener('click', () => {
@@ -240,31 +216,27 @@ function initMobileMenu() {
 // =========================================
 
 function initSearch() {
-    const triggers = document.querySelectorAll('.search-trigger'); // Header + Search overlay input
+    const triggers = document.querySelectorAll('.search-trigger');
     const overlay = document.getElementById('search-overlay');
     const closeBtn = overlay.querySelector('.close-overlay');
     const input = overlay.querySelector('input');
     const wrapper = overlay.querySelector('.search-wrapper');
 
-    // Create results container
     const resultsDiv = document.createElement('div');
     resultsDiv.className = 'search-results-list';
     resultsDiv.style.cssText = "margin-top: 20px; text-align: left; max-height: 50vh; overflow-y: auto;";
     wrapper.appendChild(resultsDiv);
 
-    // Open
     triggers.forEach(btn => btn.addEventListener('click', () => {
         overlay.classList.add('open');
         input.focus();
     }));
 
-    // Close
     closeBtn.addEventListener('click', () => overlay.classList.remove('open'));
 
-    // Live Search Logic
     input.addEventListener('keyup', (e) => {
         const term = e.target.value.toLowerCase();
-        resultsDiv.innerHTML = ''; // Clear
+        resultsDiv.innerHTML = ''; 
 
         if (term.length < 2) return;
 
@@ -310,7 +282,6 @@ function initCart() {
     triggers.forEach(btn => btn.addEventListener('click', (e) => {
         e.preventDefault();
         sidebar.classList.add('open');
-        // Add overlay backdrop if not present
         if(!document.querySelector('.cart-backdrop')) {
             const backdrop = document.createElement('div');
             backdrop.className = 'cart-backdrop';
@@ -338,7 +309,6 @@ function addToCart(productId) {
     renderCart();
     showNotification(`Added ${product.name} to bag`);
     
-    // Auto open cart
     document.querySelector('.cart-trigger').click();
 }
 
@@ -353,16 +323,13 @@ function renderCart() {
     const countSpan = document.querySelector('.cart-count');
     const totalEl = document.querySelector('.cart-total-price');
 
-    // Update Counts
     badge.innerText = state.cart.length;
     countSpan.innerText = state.cart.length;
 
-    // Calculate Total
     let total = 0;
     state.cart.forEach(item => total += item.price);
     totalEl.innerText = formatPrice(total);
 
-    // Render Items
     container.innerHTML = '';
     
     if (state.cart.length === 0) {
@@ -392,23 +359,47 @@ function renderCart() {
 }
 
 // =========================================
-// 8. QUICK VIEW MODAL (Dynamic Injection)
+// 8. RESPONSIVE QUICK VIEW (UPDATED FIXED)
 // =========================================
 
 function initQuickView() {
-    // Inject Modal HTML
+    // 1. Inject Responsive Styles specifically for the modal
+    const style = document.createElement('style');
+    style.innerHTML = `
+        .qv-container {
+            max-width: 800px; width: 90%; background: white;
+            display: flex; overflow: hidden; position: relative;
+            max-height: 90vh; 
+        }
+        .qv-image-wrap { width: 50%; background: #f9f9f9; }
+        .qv-content-wrap { width: 50%; padding: 40px; display: flex; flex-direction: column; justify-content: center; }
+        .qv-image-wrap img { width: 100%; height: 100%; object-fit: cover; }
+        
+        /* MOBILE FIX */
+        @media (max-width: 768px) {
+            .qv-container { flex-direction: column; overflow-y: auto; }
+            .qv-image-wrap { width: 100%; height: 250px; }
+            .qv-content-wrap { width: 100%; padding: 20px; }
+            .close-modal-qv { background: white; border-radius: 50%; }
+        }
+    `;
+    document.head.appendChild(style);
+
+    // 2. Inject Modal HTML with Classes
     const qvHTML = `
         <div id="quick-view-modal" class="modal-overlay">
-            <div class="modal-card" style="max-width: 800px; width: 90%; display: flex; padding: 0; overflow: hidden; text-align: left;">
-                <button class="close-modal" style="z-index: 10; background: white; border-radius: 50%; width: 30px; height: 30px;">&times;</button>
-                <div class="qv-image" style="width: 50%;">
-                    <img src="" style="width: 100%; height: 100%; object-fit: cover;">
+            <div class="qv-container">
+                <button class="close-modal-qv" style="position:absolute; top:15px; right:15px; z-index:10; border:none; font-size:1.5rem; cursor:pointer;">&times;</button>
+                
+                <div class="qv-image-wrap">
+                    <img src="" alt="Product">
                 </div>
-                <div class="qv-details" style="width: 50%; padding: 40px; display: flex; flex-direction: column; justify-content: center;">
-                    <span class="qv-cat" style="color: #666; text-transform: uppercase; font-size: 0.8rem;"></span>
-                    <h2 class="qv-title" style="margin: 10px 0;"></h2>
-                    <p class="qv-desc" style="color: #555; margin-bottom: 20px;"></p>
-                    <h3 class="qv-price" style="color: #D4AF37; margin-bottom: 30px;"></h3>
+                
+                <div class="qv-content-wrap">
+                    <span class="qv-cat" style="color: #666; text-transform: uppercase; font-size: 0.8rem; letter-spacing:1px;"></span>
+                    <h2 class="qv-title" style="margin: 10px 0; font-family: 'Playfair Display', serif; font-size: 2rem;"></h2>
+                    <p class="qv-desc" style="color: #555; margin-bottom: 20px; line-height: 1.6;"></p>
+                    <h3 class="qv-price" style="color: #D4AF37; margin-bottom: 30px; font-size: 1.5rem;"></h3>
                     <button class="btn btn-black btn-block qv-add">Add to Bag</button>
                 </div>
             </div>
@@ -416,15 +407,15 @@ function initQuickView() {
     `;
     document.body.insertAdjacentHTML('beforeend', qvHTML);
 
+    // 3. Interaction Logic
     const modal = document.getElementById('quick-view-modal');
-    const closeBtn = modal.querySelector('.close-modal');
+    const closeBtn = modal.querySelector('.close-modal-qv');
 
     closeBtn.addEventListener('click', () => {
         modal.classList.remove('open');
         document.body.classList.remove('no-scroll');
     });
 
-    // Make trigger function global so buttons can use it
     window.openQuickView = (productId) => {
         const p = products.find(x => x.id === productId);
         if(!p) return;
@@ -435,7 +426,6 @@ function initQuickView() {
         modal.querySelector('.qv-desc').innerText = p.desc;
         modal.querySelector('.qv-price').innerText = formatPrice(p.price);
         
-        // Reset Add Button
         const addBtn = modal.querySelector('.qv-add');
         addBtn.innerText = "Add to Bag";
         addBtn.onclick = () => {
@@ -450,20 +440,14 @@ function initQuickView() {
 }
 
 function initProductButtons() {
-    // Attach listeners to the HTML static buttons
-    // We map them to ID 1, 2, 3, 4 based on order
-    
-    // Quick View Buttons
     const qvBtns = document.querySelectorAll('.quick-view-btn');
     qvBtns.forEach((btn, index) => {
         btn.addEventListener('click', (e) => {
             e.preventDefault();
-            // Use index + 1 as mock ID
             window.openQuickView(index + 1);
         });
     });
 
-    // Add to Cart Buttons
     const atcBtns = document.querySelectorAll('.add-to-cart-btn');
     atcBtns.forEach((btn, index) => {
         btn.addEventListener('click', (e) => {
@@ -480,27 +464,23 @@ function initProductButtons() {
 function initBundleBuilder() {
     const steps = document.querySelectorAll('.bundle-steps .step');
     const images = document.querySelectorAll('.collage-img');
-    const startBtn = document.querySelector('.bundle-text .btn-black');
+    const startBtn = document.querySelector('.bundle-section .btn-black'); // Corrected Selector
     let currentStep = 0;
 
-    // Simulate Step Click
+    if(!startBtn) return; // Guard clause if section missing
+
     steps.forEach((step, index) => {
         step.addEventListener('click', () => {
-            // Update UI
             steps.forEach(s => s.classList.remove('active'));
             step.classList.add('active');
-            
-            // Highlight relevant image in collage
             images.forEach(img => img.style.opacity = '0.5');
             if(images[index]) images[index].style.opacity = '1';
-            
             currentStep = index;
         });
     });
 
     startBtn.addEventListener('click', () => {
         showNotification("Launching Bundle Configurator...");
-        // In a real app, this would redirect to a builder page
     });
 }
 
@@ -525,7 +505,6 @@ function showNotification(msg) {
     }, 3000);
 }
 
-// CSS Animation for Toast
 const styleSheet = document.createElement("style");
 styleSheet.innerText = `
     @keyframes fadeUp { from { opacity: 0; transform: translate(-50%, 20px); } to { opacity: 1; transform: translate(-50%, 0); } }
