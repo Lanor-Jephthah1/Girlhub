@@ -449,7 +449,7 @@ body:not(.loading) #preloader {
     left: 0; 
     z-index: 1;
     /* High-res image of a cream canvas tote bag */
-    background-image: url('https://images.unsplash.com/photo-1544816155-12df9643f363?q=80&w=600&auto=format&fit=crop'); 
+    background-image: url('https://images.unsplash.com/photo-1544816155-12df9643f363?q=80&w=400&auto=format&fit=crop'); 
     background-size: cover;
     background-position: center;
 }
@@ -743,5 +743,6 @@ body:not(.loading) #preloader {
     }
 }
 }
+
 
 
