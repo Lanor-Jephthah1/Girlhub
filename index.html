@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- 
+        GIRLHUB BY DEBBS
+        Developed for: Lanor Jephthah Kwame
+        Target Audience: University Ladies & Young Professionals
+    -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO & Social Sharing -->
+    <title>Girlhub by Debbs | The Ultimate Aesthetic Shop</title>
+    <meta name="description" content="Luxury essentials for the modern university girl. Jewelry, perfumes, tumblers, and digital planners.">
+    <meta property="og:title" content="Girlhub by Debbs">
+    <meta property="og:image" content="assets/og-image.jpg">
+    
+    <!-- Fonts: 'Playfair Display' (Luxury) & 'Montserrat' (Clean/Modern) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="loading">
+
+    <!-- =========================================
+       0. PRELOADER (Luxury Entry Animation)
+       ========================================= -->
+    <div id="preloader">
+        <div class="loader-content">
+            <span class="loader-logo">GH</span>
+            <div class="loading-bar"><div class="bar-fill"></div></div>
+            <p>Loading Aesthetics...</p>
+        </div>
+    </div>
+
+    <!-- =========================================
+       1. LOCATION & EMAIL MODAL (Popup)
+       ========================================= -->
+    <div id="entry-modal" class="modal-overlay" role="dialog" aria-modal="true">
+        <div class="modal-card fade-up">
+            <button class="close-modal" aria-label="Close modal">&times;</button>
+            <div class="modal-header">
+                <h2>Hey, Queen! 👑</h2>
+                <p>Customize your shopping experience.</p>
+            </div>
+            <form id="preference-form">
+                <div class="form-group">
+                    <label for="shipping-loc">Shipping Location</label>
+                    <div class="select-wrapper">
+                        <select id="shipping-loc" name="location">
+                            <option value="GH" data-symbol="₵">Ghana (GHS ₵)</option>
+                            <option value="NG" data-symbol="₦">Nigeria (NGN ₦)</option>
+                            <option value="UK" data-symbol="£">United Kingdom (GBP £)</option>
+                            <option value="US" data-symbol="$">United States (USD $)</option>
+                        </select>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email-signup">Unlock 10% Off</label>
+                    <input type="email" id="email-signup" placeholder="Enter your email address" required>
+                </div>
+                <button type="submit" class="btn btn-gold btn-block">Enter Girlhub</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- =========================================
+       2. SEARCH OVERLAY (Full Screen)
+       ========================================= -->
+    <div id="search-overlay" class="overlay-screen">
+        <button class="close-overlay">&times;</button>
+        <div class="search-wrapper">
+            <input type="text" placeholder="Search for necklaces, totes, vibes..." autofocus>
+            <div class="quick-links">
+                <span>Trending:</span>
+                <a href="#">Rose Gold</a>
+                <a href="#">Uni Totes</a>
+                <a href="#">Digital Planners</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- =========================================
+       3. CART SIDEBAR (Slide Out)
+       ========================================= -->
+    <aside id="cart-sidebar" class="sidebar-right">
+        <div class="sidebar-header">
+            <h3>Your Bag (<span class="cart-count">0</span>)</h3>
+            <button class="close-sidebar">&times;</button>
+        </div>
+        <div class="cart-items-container">
+            <!-- Items injected via JS -->
+            <div class="empty-state">
+                <i class="far fa-sad-tear"></i>
+                <p>Your bag is empty, bestie!</p>
+            </div>
+        </div>
+        <div class="sidebar-footer">
+            <div class="subtotal">
+                <span>Subtotal</span>
+                <span class="cart-total-price">0.00</span>
+            </div>
+            <p class="shipping-note">Shipping & taxes calculated at checkout</p>
+            <button class="btn btn-black btn-block">Secure The Bag</button>
+        </div>
+    </aside>
+
+    <!-- =========================================
+       4. ANNOUNCEMENT BAR (Marquee)
+       ========================================= -->
+    <div class="announcement-bar">
+        <div class="marquee-track">
+            <span>✨ MANIFESTING ACADEMIC SUCCESS ✨ FREE SHIPPING ON ORDERS OVER 500₵ ✨ NEW TUMBLERS IN STOCK ✨ STUDENT DISCOUNT AVAILABLE ✨</span>
+            <span>✨ MANIFESTING ACADEMIC SUCCESS ✨ FREE SHIPPING ON ORDERS OVER 500₵ ✨ NEW TUMBLERS IN STOCK ✨ STUDENT DISCOUNT AVAILABLE ✨</span>
+        </div>
+    </div>
+
+    <!-- =========================================
+       5. MAIN NAVIGATION
+       ========================================= -->
+    <header class="main-header">
+        <div class="container nav-container">
+            <!-- Mobile Toggle -->
+            <button class="mobile-toggle" aria-label="Open Menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+
+            <!-- Brand -->
+            <a href="index.html" class="brand-logo">
+                Girlhub <span class="accent-text">by Debbs</span>
+            </a>
+
+            <!-- Desktop Menu -->
+            <nav class="desktop-nav">
+                <ul class="nav-list">
+                    <li><a href="#new" class="nav-link active">New In</a></li>
+                    
+                    <!-- Mega Menu Trigger -->
+                    <li class="has-dropdown">
+                        <a href="#shop" class="nav-link">Shop <i class="fas fa-chevron-down"></i></a>
+                        <div class="mega-menu">
+                            <div class="menu-column">
+                                <h4>Jewelry</h4>
+                                <a href="#">Necklaces</a>
+                                <a href="#">Earrings</a>
+                                <a href="#">Bracelets</a>
+                                <a href="#">Anklets</a>
+                            </div>
+                            <div class="menu-column">
+                                <h4>Accessories</h4>
+                                <a href="#">Uni Bags</a>
+                                <a href="#">Tumblers</a>
+                                <a href="#">Laptop Sleeves</a>
+                            </div>
+                            <div class="menu-column">
+                                <h4>Beauty</h4>
+                                <a href="#">Perfumes</a>
+                                <a href="#">Lip Gloss</a>
+                                <a href="#">Body Shimmers</a>
+                            </div>
+                            <div class="menu-image">
+                                <img src="assets/menu-promo.jpg" alt="New Collection"> <!-- Placeholder -->
+                            </div>
+                        </div>
+                    </li>
+
+                    <li><a href="#bundles" class="nav-link">Uni Bundles</a></li>
+                    <li><a href="#digital" class="nav-link">Digital</a></li>
+                </ul>
+            </nav>
+
+            <!-- User Actions -->
+            <div class="user-actions">
+                <button class="action-btn search-trigger"><i class="fas fa-search"></i></button>
+                <button class="action-btn wishlist-trigger"><i class="far fa-heart"></i></button>
+                <button class="action-btn cart-trigger">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="badge">0</span>
+                </button>
+                <div class="currency-display hidden-mobile">GH ₵</div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- =========================================
+           6. HERO SECTION
+           ========================================= -->
+        <section class="hero">
+            <div class="hero-bg-video">
+                <!-- Video or High-Res Image goes here via CSS -->
+            </div>
+            <div class="hero-content container">
+                <span class="hero-subtitle fade-in">For the University Baddie & Corporate Queen</span>
+                <h1 class="hero-title fade-in delay-1">ACCESSORIZE <br> YOUR AMBITION</h1>
+                <div class="hero-buttons fade-in delay-2">
+                    <a href="#shop" class="btn btn-gold">Shop The Drop</a>
+                    <a href="#bundles" class="btn btn-outline-white">View Bundles</a>
+                </div>
+            </div>
+            <div class="scroll-indicator">
+                <span>Scroll</span>
+                <div class="line"></div>
+            </div>
+        </section>
+
+        <!-- =========================================
+           7. USP BAR (Trust Signals)
+           ========================================= -->
+        <div class="usp-bar container">
+            <div class="usp-item">
+                <i class="fas fa-graduation-cap"></i>
+                <span>Student Discounts</span>
+            </div>
+            <div class="usp-item">
+                <i class="fas fa-shipping-fast"></i>
+                <span>Fast Campus Delivery</span>
+            </div>
+            <div class="usp-item">
+                <i class="fas fa-gem"></i>
+                <span>Tarnish-Free Gold</span>
+            </div>
+        </div>
+
+        <!-- =========================================
+           8. VIBE CHECK (Categories)
+           ========================================= -->
+        <section class="section vibe-check container">
+            <div class="section-header text-center">
+                <h2>What's The Vibe Today?</h2>
+                <div class="divider-gold"></div>
+            </div>
+            <div class="vibe-grid">
+                <!-- Vibe 1 -->
+                <a href="#" class="vibe-card">
+                    <div class="img-wrapper">
+                        <img src="https://source.unsplash.com/random/600x800?university,fashion" alt="Lecture Hall">
+                    </div>
+                    <div class="vibe-info">
+                        <h3>Lecture Hall</h3>
+                        <span>Totes & Tumblers</span>
+                    </div>
+                </a>
+                <!-- Vibe 2 -->
+                <a href="#" class="vibe-card">
+                    <div class="img-wrapper">
+                        <img src="https://source.unsplash.com/random/600x800?night,party" alt="Girls Night">
+                    </div>
+                    <div class="vibe-info">
+                        <h3>Girls Night</h3>
+                        <span>Perfume & Bling</span>
+                    </div>
+                </a>
+                <!-- Vibe 3 -->
+                <a href="#" class="vibe-card">
+                    <div class="img-wrapper">
+                        <img src="https://source.unsplash.com/random/600x800?gold,jewelry" alt="Date Night">
+                    </div>
+                    <div class="vibe-info">
+                        <h3>Date Night</h3>
+                        <span>Dainty Gold</span>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- =========================================
+           9. PRODUCT CAROUSEL (Best Sellers)
+           ========================================= -->
+        <section class="section new-arrivals">
+            <div class="container">
+                <div class="section-header flex-between">
+                    <h2>Trending on Campus</h2>
+                    <a href="#" class="link-underline">View All</a>
+                </div>
+                
+                <!-- Product Slider Container -->
+                <div class="product-scroller">
+                    <!-- Product 1 -->
+                    <div class="product-card">
+                        <div class="product-image">
+                            <span class="tag">Hot</span>
+                            <img src="https://source.unsplash.com/random/400x500?necklace" alt="Gold Choker">
+                            <button class="quick-view-btn"><i class="far fa-eye"></i> Quick View</button>
+                            <button class="add-to-cart-btn">Add to Bag</button>
+                        </div>
+                        <div class="product-details">
+                            <span class="cat">Jewelry</span>
+                            <h4>The 'Debbs' Choker</h4>
+                            <div class="price">₵150.00</div>
+                        </div>
+                    </div>
+
+                    <!-- Product 2 -->
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="https://source.unsplash.com/random/400x500?perfume" alt="Perfume">
+                            <button class="quick-view-btn"><i class="far fa-eye"></i> Quick View</button>
+                            <button class="add-to-cart-btn">Add to Bag</button>
+                        </div>
+                        <div class="product-details">
+                            <span class="cat">Fragrance</span>
+                            <h4>Vanilla Oud Essence</h4>
+                            <div class="price">₵200.00</div>
+                        </div>
+                    </div>
+
+                    <!-- Product 3 -->
+                    <div class="product-card">
+                        <div class="product-image">
+                            <span class="tag sale">Sale</span>
+                            <img src="https://source.unsplash.com/random/400x500?totebag" alt="Tote Bag">
+                            <button class="quick-view-btn"><i class="far fa-eye"></i> Quick View</button>
+                            <button class="add-to-cart-btn">Add to Bag</button>
+                        </div>
+                        <div class="product-details">
+                            <span class="cat">Accessories</span>
+                            <h4>The Uni Tote</h4>
+                            <div class="price"><span class="old-price">₵120</span> ₵90.00</div>
+                        </div>
+                    </div>
+                     <!-- Product 4 -->
+                     <div class="product-card">
+                        <div class="product-image">
+                            <img src="https://source.unsplash.com/random/400x500?tumbler" alt="Tumbler">
+                            <button class="quick-view-btn"><i class="far fa-eye"></i> Quick View</button>
+                            <button class="add-to-cart-btn">Add to Bag</button>
+                        </div>
+                        <div class="product-details">
+                            <span class="cat">Lifestyle</span>
+                            <h4>Aesthetic Tumbler</h4>
+                            <div class="price">₵85.00</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =========================================
+           10. BUNDLE BUILDER (Interactive)
+           ========================================= -->
+        <section id="bundles" class="section bundle-section bg-light">
+            <div class="container split-layout">
+                <div class="bundle-text">
+                    <span class="subtitle-gold">University Essentials Kit</span>
+                    <h2>Build Your Own Bundle</h2>
+                    <p>Save 15% when you grab a Tote, a Tumbler, and a Necklace together.</p>
+                    
+                    <div class="bundle-steps">
+                        <div class="step active">
+                            <div class="circle">1</div>
+                            <span>Choose Bag</span>
+                        </div>
+                        <div class="line"></div>
+                        <div class="step">
+                            <div class="circle">2</div>
+                            <span>Choose Cup</span>
+                        </div>
+                        <div class="line"></div>
+                        <div class="step">
+                            <div class="circle">3</div>
+                            <span>Choose Bling</span>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-black">Start Building</button>
+                </div>
+                <div class="bundle-visuals">
+                    <div class="collage">
+                        <!-- CSS will handle the positioning of images here -->
+                        <div class="collage-img img-1"></div>
+                        <div class="collage-img img-2"></div>
+                        <div class="collage-img img-3"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =========================================
+           11. DIGITAL & LIFESTYLE (Parallax)
+           ========================================= -->
+        <section id="digital" class="section digital-section">
+            <div class="overlay-dark"></div>
+            <div class="digital-content text-center">
+                <h2>Digital Luxury</h2>
+                <p>Planners, Wallpapers, and Vision Boards for the organized Queen.</p>
+                <div class="icon-grid">
+                    <div class="icon-box">
+                        <i class="fas fa-mobile-alt"></i>
+                        <span>Wallpapers</span>
+                    </div>
+                    <div class="icon-box">
+                        <i class="far fa-calendar-alt"></i>
+                        <span>Planners</span>
+                    </div>
+                </div>
+                <a href="#" class="btn btn-outline-gold">Download Now</a>
+            </div>
+        </section>
+
+        <!-- =========================================
+           12. INSTAGRAM FEED (Social Proof)
+           ========================================= -->
+        <section class="section social-feed">
+            <div class="container text-center">
+                <h2>Girlhub Queens</h2>
+                <p>Tag @girlhubbydebbs to be featured</p>
+                <div class="insta-grid">
+                    <div class="insta-item"><img src="https://source.unsplash.com/random/300x300?girl,selfie" alt="Customer"></div>
+                    <div class="insta-item"><img src="https://source.unsplash.com/random/300x300?fashion,jewelry" alt="Customer"></div>
+                    <div class="insta-item"><img src="https://source.unsplash.com/random/300x300?makeup" alt="Customer"></div>
+                    <div class="insta-item"><img src="https://source.unsplash.com/random/300x300?university" alt="Customer"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- =========================================
+       13. FOOTER
+       ========================================= -->
+    <footer class="main-footer">
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <h3>Girlhub</h3>
+                <p>Empowering women through everyday luxury. Based in Accra, Shipping Worldwide.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                    <a href="#"><i class="fab fa-snapchat-ghost"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Shop</h4>
+                <ul>
+                    <li><a href="#">New Arrivals</a></li>
+                    <li><a href="#">Bestsellers</a></li>
+                    <li><a href="#">Bundles</a></li>
+                    <li><a href="#">Digital Store</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-links">
+                <h4>Customer Care</h4>
+                <ul>
+                    <li><a href="#">Track Order</a></li>
+                    <li><a href="#">Shipping Policy</a></li>
+                    <li><a href="#">Returns & Exchanges</a></li>
+                    <li><a href="#">Size Guide</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-newsletter">
+                <h4>Stay In The Loop</h4>
+                <p>Subscribe for exclusive drops and student discounts.</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Your email address">
+                    <button type="submit"><i class="fas fa-arrow-right"></i></button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="footer-bottom container">
+            <p>&copy; 2025 Girlhub by Debbs. All rights reserved.</p>
+            <div class="payment-methods">
+                <i class="fab fa-cc-visa"></i>
+                <i class="fab fa-cc-mastercard"></i>
+                <i class="fas fa-mobile-alt"></i> <!-- Generic Mobile Money Icon -->
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+</body>
+</html>
