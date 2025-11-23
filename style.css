@@ -246,7 +246,7 @@ body:not(.loading) #preloader {
 }
 
 .mobile-toggle { display: none; background: none; border: none; flex-direction: column; gap: 5px; cursor: pointer; }
-.bar { width: 25px; height: 2px; background: var(--black-matte); }
+.bar { width: 25px; height: 2px; background: #F4DF99; }
 
 /* =========================================
    5. HERO SECTION
@@ -743,6 +743,7 @@ body:not(.loading) #preloader {
     }
 }
 }
+
 
 
 
