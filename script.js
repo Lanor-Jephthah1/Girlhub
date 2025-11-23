@@ -510,3 +510,4 @@ styleSheet.innerText = `
     @keyframes fadeUp { from { opacity: 0; transform: translate(-50%, 20px); } to { opacity: 1; transform: translate(-50%, 0); } }
 `;
 document.head.appendChild(styleSheet);
+
