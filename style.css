@@ -160,7 +160,7 @@ body:not(.loading) #preloader {
    4. HEADER & NAVIGATION
    ========================================= */
 .announcement-bar {
-    background: var(--black-matte);
+    background: #F4DF99;
     color: var(--gold-primary);
     font-size: 0.75rem;
     padding: 8px 0;
@@ -743,6 +743,7 @@ body:not(.loading) #preloader {
     }
 }
 }
+
 
 
 
