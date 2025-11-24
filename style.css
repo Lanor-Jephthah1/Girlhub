@@ -220,12 +220,20 @@ body:not(.loading) #preloader {
 .mega-menu {
     position: absolute; top: var(--header-height); left: 0; width: 100%;
     background: var(--white);
-    padding: 40px var(--container-width); /* Align with container */
+    padding: 40px 0;
     display: flex; justify-content: center; gap: 60px;
     border-top: 1px solid var(--grey-light);
     box-shadow: 0 10px 30px rgba(0,0,0,0.05);
     opacity: 0; visibility: hidden; transform: translateY(10px);
     transition: var(--transition-fast);
+}
+
+.menu-column h4 { color: var(--gold-dark); margin-bottom: 15px; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase; }
+
+.bar { 
+    width: 25px; 
+    height: 2px; 
+    background: var(--black-matte); /* <--- THIS IS THE COLOR */
 }
 
 .menu-column h4 { color: var(--gold-dark); margin-bottom: 15px; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase; }
@@ -743,6 +751,7 @@ body:not(.loading) #preloader {
     }
 }
 }
+
 
 
 
