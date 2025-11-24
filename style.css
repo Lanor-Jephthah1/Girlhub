@@ -237,6 +237,14 @@ body:not(.loading) #preloader {
 }
 
 .menu-column h4 { color: var(--gold-dark); margin-bottom: 15px; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase; }
+
+.bar { 
+    width: 25px; 
+    height: 2px; 
+    background: var(--black-matte); /* <--- THIS IS THE COLOR */
+}
+
+.menu-column h4 { color: var(--gold-dark); margin-bottom: 15px; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase; }
 .menu-column a { display: block; margin-bottom: 10px; color: var(--text-grey); font-size: 0.9rem; }
 .menu-column a:hover { color: var(--black-matte); transform: translateX(5px); }
 
