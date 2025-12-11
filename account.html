@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Account | Girlhub by Debbs</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Minimal Header -->
+    <header class="main-header" style="position: relative;">
+        <div class="container nav-container" style="justify-content: center;">
+            <a href="index.html" class="brand-logo">
+                Girlhub <span class="accent-text">by Debbs</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Split Screen Auth Layout -->
+    <div class="auth-page-wrapper">
+        <!-- Left Side: Visuals -->
+        <div class="auth-visuals">
+            <div class="auth-visual-content">
+                <h2>Join the Club</h2>
+                <p>Unlock 10% off your first order, exclusive access to drops, and seamless checkout.</p>
+            </div>
+        </div>
+
+        <!-- Right Side: Forms -->
+        <div class="auth-forms-container">
+            <div class="auth-card flat">
+                <div class="auth-tabs">
+                    <button class="auth-tab active" onclick="switchAuth('login')">Log In</button>
+                    <button class="auth-tab" onclick="switchAuth('register')">Sign Up</button>
+                </div>
+
+                <!-- Login Form -->
+                <form id="login-form" class="auth-form active">
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input type="email" id="login-email" placeholder="queen@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" id="login-pass" placeholder="••••••••" required>
+                    </div>
+                    <div class="form-actions">
+                        <span class="forgot-pass">Forgot Password?</span>
+                    </div>
+                    <button type="submit" class="btn btn-black btn-block">Sign In</button>
+                </form>
+
+                <!-- Register Form -->
+                <form id="register-form" class="auth-form">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" id="reg-name" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input type="email" id="reg-email" placeholder="queen@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Create Password</label>
+                        <input type="password" id="reg-pass" placeholder="••••••••" required>
+                    </div>
+                    <button type="submit" class="btn btn-gold btn-block">Create Account</button>
+                </form>
+
+                <!-- Google Sign In -->
+                <div class="divider"><span>OR</span></div>
+                <button class="btn-google btn-block" onclick="handleGoogleLogin()">
+                    <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google">
+                    Continue with Google
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+</body>
+</html>
