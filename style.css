@@ -353,7 +353,7 @@ body:not(.loading) #preloader {
 .usp-item { display: flex; align-items: center; gap: 10px; color: var(--grey-text); font-size: 0.9rem; }
 .usp-item i { color: var(--gold-dark); font-size: 1.2rem; }
 
-.section { padding: 80px 0; }
+.section { padding: 20px 0; }
 .section-header { margin-bottom: 60px; }
 .divider-gold { width: 60px; height: 3px; background: var(--gold-primary); margin: 15px auto; }
 .text-center { text-align: center; }
@@ -912,4 +912,5 @@ body:not(.loading) #preloader {
         opacity: 1;
         transform: scale(1);
     }
+
 }
