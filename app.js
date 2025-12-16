@@ -163,6 +163,15 @@ function navigateTo(event, url, filter = null) {
     if (event) event.preventDefault();
     
     const transition = document.getElementById('page-transition');
+    if (!transition) {
+        // No transition element, navigate directly
+        if (filter) {
+            sessionStorage.setItem('productFilter', filter);
+        }
+        window.location.href = url;
+        return;
+    }
+    
     transition.classList.add('active');
     
     setTimeout(() => {
