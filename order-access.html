@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmed - Girlhub by Debbs</title>
+    <link rel="icon" type="image/png" href="gh.png" />
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        .success-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #f5f5f5 0%, #fff 100%);
+            padding: 40px 20px;
+        }
+        
+        .success-card {
+            background: white;
+            max-width: 600px;
+            width: 100%;
+            padding: 60px 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            text-align: center;
+            animation: fadeInUp 0.6s ease;
+        }
+        
+        .success-icon {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #BF953F 0%, #FCF6BA 50%, #B38728 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            animation: scaleIn 0.5s ease 0.3s both;
+        }
+        
+        .success-icon i {
+            font-size: 3rem;
+            color: white;
+        }
+        
+        .success-card h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: #111;
+        }
+        
+        .success-card p {
+            color: #666;
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        
+        .order-details {
+            background: #fafafa;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            text-align: left;
+        }
+        
+        .order-detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .order-detail-row:last-child {
+            border-bottom: none;
+        }
+        
+        .order-detail-label {
+            color: #666;
+            font-weight: 500;
+        }
+        
+        .order-detail-value {
+            font-weight: 600;
+            color: #111;
+        }
+        
+        .order-number {
+            font-size: 1.5rem;
+            color: #D4AF37;
+            font-weight: 700;
+        }
+        
+        .action-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .btn-outline-gold {
+            border: 2px solid #D4AF37;
+            color: #D4AF37;
+            background: white;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-outline-gold:hover {
+            background: #D4AF37;
+            color: #111;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .success-card {
+                padding: 40px 30px;
+            }
+            
+            .success-card h1 {
+                font-size: 2rem;
+            }
+            
+            .action-buttons {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="success-container">
+        <div class="success-card">
+            <div class="success-icon">
+                <i class="fas fa-check"></i>
+            </div>
+            
+            <h1>Order Confirmed!</h1>
+            <p>Thank you for your purchase, Queen! Your order has been successfully placed and we're preparing it for delivery.</p>
+            
+            <div class="order-details">
+                <div class="order-detail-row">
+                    <span class="order-detail-label">Order Number</span>
+                    <span class="order-detail-value order-number" id="order-number">Loading...</span>
+                </div>
+                <div class="order-detail-row">
+                    <span class="order-detail-label">Date</span>
+                    <span class="order-detail-value" id="order-date">Loading...</span>
+                </div>
+                <div class="order-detail-row">
+                    <span class="order-detail-label">Total Paid</span>
+                    <span class="order-detail-value" id="order-total">Loading...</span>
+                </div>
+                <div class="order-detail-row">
+                    <span class="order-detail-label">Payment Method</span>
+                    <span class="order-detail-value" id="payment-method">Loading...</span>
+                </div>
+                <div class="order-detail-row">
+                    <span class="order-detail-label">Delivery Address</span>
+                    <span class="order-detail-value" id="delivery-address">Loading...</span>
+                </div>
+            </div>
+            
+            <p style="color: #D4AF37; font-weight: 600;">
+                <i class="fas fa-envelope"></i> 
+                A confirmation email has been sent to your email address.
+            </p>
+            
+            <div class="action-buttons">
+                <a href="profile.html" class="btn btn-gold">
+                    <i class="fas fa-box"></i> Track Order
+                </a>
+                <a href="products.html" class="btn-outline-gold">
+                    <i class="fas fa-shopping-bag"></i> Continue Shopping
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <script src="app.js"></script>
+    <script>
+        // Load and display order details
+        document.addEventListener('DOMContentLoaded', () => {
+            const lastOrder = localStorage.getItem('last_order');
+            
+            if (!lastOrder) {
+                window.location.href = 'index.html';
+                return;
+            }
+            
+            const order = JSON.parse(lastOrder);
+            
+            // Display order details
+            document.getElementById('order-number').textContent = order.orderNumber;
+            document.getElementById('order-date').textContent = new Date(order.timestamp).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+            document.getElementById('order-total').textContent = formatPrice(order.summary.total);
+            document.getElementById('payment-method').textContent = formatPaymentMethod(order.payment.method);
+            document.getElementById('delivery-address').textContent = `${order.shipping.address}, ${order.shipping.city}`;
+            
+            // Clear the last order after displaying
+            setTimeout(() => {
+                localStorage.removeItem('last_order');
+            }, 1000);
+        });
+        
+        function formatPrice(amount) {
+            const savedCurrency = localStorage.getItem('girlhub_currency');
+            let rate = 1;
+            let symbol = '₵';
+            
+            if (savedCurrency) {
+                const currency = JSON.parse(savedCurrency);
+                rate = currency.rate;
+                symbol = currency.symbol;
+            }
+            
+            const converted = amount * rate;
+            return `${symbol}${converted.toFixed(2)}`;
+        }
+        
+        function formatPaymentMethod(method) {
+            const methods = {
+                'card': 'Credit/Debit Card',
+                'mobile-money': 'Mobile Money',
+                'bank-transfer': 'Bank Transfer',
+                'cash-on-delivery': 'Cash on Delivery'
+            };
+            return methods[method] || method;
+        }
+    </script>
+</body>
+</html>
